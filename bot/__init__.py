@@ -73,6 +73,10 @@ var_list = [
     "BASE_URL",
     "DISABLE_JD",
     "DISABLE_STREAM",
+    "DISABLE_NZB",
+    "DISABLE_TORRENTS",
+    "HELPER_TOKENS",
+    "USER_SESSION_STRING",
     "UPSTREAM_REPO",
     "UPSTREAM_BRANCH",
 ]
