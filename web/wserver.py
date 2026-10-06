@@ -12,7 +12,7 @@ from asyncio import new_event_loop, set_event_loop
 bot_loop = new_event_loop()
 set_event_loop(bot_loop)
 
-from asyncio import sleep
+from asyncio import sleep, wait_for
 from importlib import import_module
 from os import environ
 from re import compile as re_compile
@@ -195,7 +195,13 @@ http_session = None
 async def lifespan(app: FastAPI):
     global aria2, qbittorrent, http_session
     aria2 = Aria2HttpClient("http://localhost:6800/jsonrpc")
-    qbittorrent = await create_client("http://localhost:8090/api/v2/")
+try:
+        qbittorrent = await wait_for(
+            create_client("http://localhost:8090/api/v2/"), timeout=5
+        )
+    except Exception as e:
+        qbittorrent = None
+        LOGGER.warning(f"qBittorrent client unavailable for web UI: {e}")
     http_session = ClientSession(
         auto_decompress=True,
         timeout=ClientTimeout(
@@ -204,7 +210,8 @@ async def lifespan(app: FastAPI):
     )
     yield
     await aria2.close()
-    await qbittorrent.close()
+if qbittorrent is not None:
+        await qbittorrent.close()
     await http_session.close()
 
 
