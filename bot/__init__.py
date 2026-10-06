@@ -72,6 +72,7 @@ var_list = [
     "DATABASE_URL",
     "BASE_URL",
     "DISABLE_JD",
+    "DISABLE_STREAM",
     "UPSTREAM_REPO",
     "UPSTREAM_BRANCH",
 ]
