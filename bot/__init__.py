@@ -71,6 +71,7 @@ var_list = [
     "OWNER_ID",
     "DATABASE_URL",
     "BASE_URL",
+    "DISABLE_JD",
     "UPSTREAM_REPO",
     "UPSTREAM_BRANCH",
 ]
