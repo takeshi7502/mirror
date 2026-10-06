@@ -422,7 +422,7 @@ async def load_configurations():
             Config.WEB_ACCESS_PASSWORD = access_pwd
         env = f"WEB_ACCESS_PASSWORD={access_pwd} "
         bot_loop.create_task(cmd_exec(
-            f"{env}uvicorn web.wserver:app --host 0.0.0.0 --port {PORT}",
+            f"python3 -m web.health_server --port {PORT}",
             shell=True,
         ))
         bot_loop.create_task(cmd_exec("python3 cron_boot.py", shell=True))
