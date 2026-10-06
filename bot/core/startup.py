@@ -44,6 +44,11 @@ def _qbit_password():
 
 async def update_qb_options():
     LOGGER.info("Get qBittorrent options from server")
+    if not TorrentManager.qbittorrent:
+        LOGGER.warning(
+            "qBittorrent is not initialized. Skipping qBittorrent options update."
+        )
+        return
     pwd = _qbit_password()
     if not qbit_options:
         if not TorrentManager.qbittorrent:
